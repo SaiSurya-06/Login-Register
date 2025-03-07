@@ -1,10 +1,15 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
 test('renders login form', () => {
-  render(<App />);
+  render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
   const loginElements = screen.getAllByText(/login/i);
-  expect(loginElements.length).toBe(2); // Expecting both the header and button
-  expect(loginElements[0]).toBeInTheDocument(); // Check the first one (e.g., <h1>)
-  expect(loginElements[1]).toBeInTheDocument(); // Check the second one (e.g., <button>)
+  expect(loginElements.length).toBe(2);
+  expect(loginElements[0]).toBeInTheDocument();
+  expect(loginElements[1]).toBeInTheDocument();
 });

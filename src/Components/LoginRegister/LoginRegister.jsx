@@ -1,26 +1,48 @@
 import React, { useState } from 'react';
 import './LoginRegister.css';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const LoginRegister = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const registerLink = () => {
     setIsLogin(false);
+    setError('');
   };
 
   const loginLink = () => {
     setIsLogin(true);
+    setError('');
   };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic
+    const username = e.target[0].value;
+    const password = e.target[1].value;
+    
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    
+    if (storedUser && storedUser.username === username && storedUser.password === password) {
+      localStorage.setItem('isLoggedIn', true);
+      navigate('/shop');
+    } else {
+      setError('Invalid credentials');
+    }
   };
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    // Handle registration logic
+    const username = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+
+    const userData = { username, email, password };
+    localStorage.setItem('user', JSON.stringify(userData));
+    setIsLogin(true);
+    setError('Registration successful! Please login.');
   };
 
   return (
@@ -29,6 +51,7 @@ const LoginRegister = () => {
         <div className="form-box login">
           <form onSubmit={handleLoginSubmit}>
             <h1>Login</h1>
+            {error && <p style={{ color: 'red', textAlign: 'center', marginBottom: '15px' }}>{error}</p>}
             <div className="input-box">
               <input type="text" placeholder="Username" required />
               <FaUser className="icon" />
@@ -58,6 +81,7 @@ const LoginRegister = () => {
         <div className="form-box register">
           <form onSubmit={handleRegisterSubmit}>
             <h1>Registration</h1>
+            {error && <p style={{ color: 'green', textAlign: 'center', marginBottom: '15px' }}>{error}</p>}
             <div className="input-box">
               <input type="text" placeholder="Username" required />
               <FaUser className="icon" />

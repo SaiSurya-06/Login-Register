@@ -1,0 +1,268 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ecom-container {
+  min-height: 100vh;
+  background: #f4f7fc;
+}
+
+.ecom-header {
+  background: linear-gradient(135deg, #2a4365, #4c78a8);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-logo {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.header-logo:hover {
+  color: #a3bffa;
+}
+
+.header-search {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px 0 0 25px;
+  font-size: 16px;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.search-button,
+.clear-button {
+  background: #4c78a8;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.search-button {
+  border-radius: 0 25px 25px 0;
+}
+
+.clear-button {
+  border-radius: 25px;
+  margin-left: 10px;
+}
+
+.search-button:hover,
+.clear-button:hover {
+  background: #3b5998;
+}
+
+.header-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.cart-button,
+.logout-btn {
+  background: #68d391;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cart-button:hover {
+  background: #48bb78;
+}
+
+.logout-btn {
+  background: #f56565;
+}
+
+.logout-btn:hover {
+  background: #e53e3e;
+}
+
+.ecom-main {
+  padding: 40px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.product-image {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.product-info {
+  padding: 15px 0;
+}
+
+.product-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.product-rating {
+  color: #f6ad55;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.product-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2f855a;
+  margin-bottom: 12px;
+}
+
+.add-to-cart {
+  width: 100%;
+  background: #4c78a8;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background: #3b5998;
+}
+
+.loading {
+  text-align: center;
+  font-size: 20px;
+  color: #4a5568;
+  padding: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .ecom-header {
+    padding: 15px 20px;
+    flex-wrap: wrap;
+  }
+
+  .header-search {
+    max-width: 400px;
+    margin: 10px 0;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ecom-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-nav {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
+  .ecom-main {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-logo {
+    font-size: 24px;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .search-button,
+  .clear-button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .cart-button,
+  .logout-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-image {
+    height: 200px;
+  }
+
+  .product-title {
+    font-size: 16px;
+  }
+
+  .product-price {
+    font-size: 18px;
+  }
+}
