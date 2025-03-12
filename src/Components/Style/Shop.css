@@ -56,7 +56,10 @@
 
 .search-button,
 .clear-button {
-  background: #4c78a8;
+  width: 70px;
+  height: 45px;
+  /* background: #4c78a8; */
+  background: steelblue;
   color: #fff;
   border: none;
   padding: 12px 20px;

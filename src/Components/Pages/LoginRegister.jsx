@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './LoginRegister.css';
+import '../Style/LoginRegister.css';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 

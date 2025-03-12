@@ -2,9 +2,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './Context/CartContext';
-import LoginRegister from './Components/LoginRegister/LoginRegister';
-import Shop from './Components/Shop/Shop';
-import Cart from './Components/Cart/Cart';
+import LoginRegister from './Components/Pages/LoginRegister';
+import Shop from './Components/Pages/Shop';
+import Cart from './Components/Pages/Cart';
 
 function App() {
   return (

@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../Context/CartContext'; 
-import './Shop.css';
+import '../Style/Shop.css';
+import { FaSearch } from "react-icons/fa";
 
 const Shop = () => {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ const Shop = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
-          <button type="submit" className="search-button">Search</button>
+          <button type="submit" className="search-button"><FaSearch /></button>
           {searchQuery && (
             <button type="button" onClick={clearSearch} className="clear-button">
               Clear
