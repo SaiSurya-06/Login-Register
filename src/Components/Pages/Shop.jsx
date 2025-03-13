@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../Context/CartContext'; 
-import '../Style/Shop.css';
+import '../../Assets/Style/Shop.css';
 import { FaSearch } from "react-icons/fa";
 
 const Shop = () => {
@@ -27,6 +27,7 @@ const Shop = () => {
       }
     };
     fetchProducts();
+    
   }, []);
 
   const handleLogout = () => {
