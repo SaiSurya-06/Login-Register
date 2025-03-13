@@ -1,9 +1,9 @@
 // Shop.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../../Context/CartContext'; 
+import { useCart } from '../../Context/CartContext';
 import '../../Assets/Style/Shop.css';
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from 'react-icons/fa';
 
 const Shop = () => {
   const navigate = useNavigate();
@@ -12,6 +12,8 @@ const Shop = () => {
   const [originalProducts, setOriginalProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -27,7 +29,6 @@ const Shop = () => {
       }
     };
     fetchProducts();
-    
   }, []);
 
   const handleLogout = () => {
@@ -55,6 +56,12 @@ const Shop = () => {
   const goToCart = () => {
     navigate('/cart');
   };
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="ecom-container">
@@ -89,23 +96,32 @@ const Shop = () => {
         {loading ? (
           <div className="loading">Loading products...</div>
         ) : (
-          <div className="product-grid">
-            {products.map((product) => (
-              <div key={product.id} className="product-card">
-                <img src={product.thumbnail} alt={product.title} className="product-image" />
-                <div className="product-info">
-                  <h3 className="product-title">{product.title}</h3>
-                  <p className="product-rating">
-                    {'★'.repeat(Math.round(product.rating))} ({product.rating})
-                  </p>
-                  <p className="product-price">${product.price.toFixed(2)}</p>
-                  <button className="add-to-cart" onClick={() => addToCart(product)}>
-                    Add to Cart
-                  </button>
+          <>
+            <div className="product-grid">
+              {currentProducts.map((product) => (
+                <div key={product.id} className="product-card">
+                  <img src={product.thumbnail} alt={product.title} className="product-image" />
+                  <div className="product-info">
+                    <h3 className="product-title">{product.title}</h3>
+                    <p className="product-rating">
+                      {'★'.repeat(Math.round(product.rating))} ({product.rating})
+                    </p>
+                    <p className="product-price">${product.price.toFixed(2)}</p>
+                    <button className="add-to-cart" onClick={() => addToCart(product)}>
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+            <div className="pagination">
+              {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, i) => (
+                <button key={i + 1} onClick={() => paginate(i + 1)}>
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          </>
         )}
       </main>
     </div>

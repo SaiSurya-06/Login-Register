@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+// LoginRegister.jsx
 import React, { useState } from 'react';
 import '../../Assets/Style/LoginRegister.css';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
@@ -18,13 +20,22 @@ const LoginRegister = () => {
     setError('');
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 6;
+  };
+
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const username = e.target[0].value;
     const password = e.target[1].value;
-    
+
     const storedUser = JSON.parse(localStorage.getItem('user'));
-    
+
     if (storedUser && storedUser.username === username && storedUser.password === password) {
       localStorage.setItem('isLoggedIn', true);
       navigate('/shop');
@@ -39,6 +50,16 @@ const LoginRegister = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
 
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+
     const userData = { username, email, password };
     localStorage.setItem('user', JSON.stringify(userData));
     setIsLogin(true);
@@ -51,7 +72,7 @@ const LoginRegister = () => {
         <div className="form-box login">
           <form onSubmit={handleLoginSubmit}>
             <h1>Login</h1>
-            {error && <p style={{ color: 'red', textAlign: 'center', marginBottom: '15px' }}>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
             <div className="input-box">
               <input type="text" placeholder="Username" required />
               <FaUser className="icon" />
@@ -81,7 +102,7 @@ const LoginRegister = () => {
         <div className="form-box register">
           <form onSubmit={handleRegisterSubmit}>
             <h1>Registration</h1>
-            {error && <p style={{ color: 'green', textAlign: 'center', marginBottom: '15px' }}>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
             <div className="input-box">
               <input type="text" placeholder="Username" required />
               <FaUser className="icon" />

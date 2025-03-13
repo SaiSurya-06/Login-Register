@@ -1,19 +1,20 @@
+/* LoginRegister.css */
 .wrapper {
   position: relative;
   width: 420px;
-  background: rgba(255, 255, 255, 0.9); /* Slightly more opaque for readability */
+  background: rgba(255, 255, 255, 0.9);
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  color: #333; /* Darker text for contrast */
+  color: #333;
   padding: 40px 30px;
-  margin: 20px auto; /* Margin for smaller screens */
+  margin: 20px auto;
   transition: all 0.3s ease;
 }
 
 .wrapper.active {
-  height: auto; /* Let height adjust naturally */
+  height: auto;
 }
 
 .form-box {
@@ -120,6 +121,13 @@ form button:hover {
 
 .register-link p a:hover {
   text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 14px;
 }
 
 /* Responsive Adjustments */

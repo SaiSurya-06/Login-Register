@@ -1,3 +1,4 @@
+/* Shop.css */
 /* Global Reset */
 * {
   margin: 0;
@@ -58,7 +59,6 @@
 .clear-button {
   width: 70px;
   height: 45px;
-  /* background: #4c78a8; */
   background: steelblue;
   color: #fff;
   border: none;
@@ -130,6 +130,7 @@
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .product-card:hover {
@@ -190,6 +191,28 @@
   font-size: 20px;
   color: #4a5568;
   padding: 50px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  background: #4c78a8;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.pagination button:hover {
+  background: #3b5998;
 }
 
 /* Responsive Design */
