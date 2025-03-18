@@ -1,13 +1,14 @@
-// Shop.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../../Context/CartContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../store/cartSlice';
 import '../../Assets/Style/Shop.css';
 import { FaSearch } from 'react-icons/fa';
 
 const Shop = () => {
   const navigate = useNavigate();
-  const { cart, dispatch } = useCart();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
   const [products, setProducts] = useState([]);
   const [originalProducts, setOriginalProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -49,13 +50,7 @@ const Shop = () => {
     setProducts(originalProducts);
   };
 
-  const addToCart = (product) => {
-    dispatch({ type: 'ADD_TO_CART', payload: product });
-  };
-
-  const goToCart = () => {
-    navigate('/cart');
-  };
+  const goToCart = () => navigate('/cart');
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -79,9 +74,7 @@ const Shop = () => {
           />
           <button type="submit" className="search-button"><FaSearch /></button>
           {searchQuery && (
-            <button type="button" onClick={clearSearch} className="clear-button">
-              Clear
-            </button>
+            <button type="button" onClick={clearSearch} className="clear-button">Clear</button>
           )}
         </form>
         <div className="header-nav">
@@ -91,7 +84,6 @@ const Shop = () => {
           <button onClick={handleLogout} className="logout-btn">Sign Out</button>
         </div>
       </header>
-
       <main className="ecom-main">
         {loading ? (
           <div className="loading">Loading products...</div>
@@ -103,11 +95,9 @@ const Shop = () => {
                   <img src={product.thumbnail} alt={product.title} className="product-image" />
                   <div className="product-info">
                     <h3 className="product-title">{product.title}</h3>
-                    <p className="product-rating">
-                      {'★'.repeat(Math.round(product.rating))} ({product.rating})
-                    </p>
+                    <p className="product-rating">{'★'.repeat(Math.round(product.rating))} ({product.rating})</p>
                     <p className="product-price">${product.price.toFixed(2)}</p>
-                    <button className="add-to-cart" onClick={() => addToCart(product)}>
+                    <button className="add-to-cart" onClick={() => dispatch(addToCart(product))}>
                       Add to Cart
                     </button>
                   </div>
@@ -116,9 +106,7 @@ const Shop = () => {
             </div>
             <div className="pagination">
               {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, i) => (
-                <button key={i + 1} onClick={() => paginate(i + 1)}>
-                  {i + 1}
-                </button>
+                <button key={i + 1} onClick={() => paginate(i + 1)}>{i + 1}</button>
               ))}
             </div>
           </>

@@ -2,15 +2,16 @@
 .wrapper {
   position: relative;
   width: 420px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
   border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
   color: #333;
   padding: 40px 30px;
   margin: 20px auto;
   transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .wrapper.active {
@@ -20,6 +21,7 @@
 .form-box {
   width: 100%;
   padding: 20px;
+  animation: slideIn 0.5s ease-in-out;
 }
 
 form h1 {
@@ -27,6 +29,8 @@ form h1 {
   text-align: center;
   margin-bottom: 30px;
   color: #2d3748;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .input-box {
@@ -46,11 +50,12 @@ form h1 {
   color: #2d3748;
   padding: 20px 45px 20px 20px;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input-box input:focus {
   border-color: #4c78a8;
+  box-shadow: 0 0 10px rgba(76, 120, 168, 0.3);
 }
 
 .input-box input::placeholder {
@@ -64,6 +69,11 @@ form h1 {
   transform: translateY(-50%);
   font-size: 16px;
   color: #4c78a8;
+  transition: color 0.3s ease;
+}
+
+.input-box input:focus + .icon {
+  color: #3b5998;
 }
 
 .remember-forgot {
@@ -83,9 +93,11 @@ form h1 {
 .remember-forgot a {
   color: #4c78a8;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .remember-forgot a:hover {
+  color: #3b5998;
   text-decoration: underline;
 }
 
@@ -99,11 +111,12 @@ form button {
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 form button:hover {
   background: #3b5998;
+  transform: scale(1.05);
 }
 
 .register-link {
@@ -117,17 +130,45 @@ form button:hover {
   color: #4c78a8;
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .register-link p a:hover {
+  color: #3b5998;
   text-decoration: underline;
 }
 
 .error-message {
-  color: red;
+  color: #e53e3e;
   text-align: center;
   margin-bottom: 15px;
   font-size: 14px;
+  background: rgba(245, 101, 101, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Responsive Adjustments */

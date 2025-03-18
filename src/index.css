@@ -17,3 +17,13 @@ body {
   background-position: center;
   transition: background 0.5s ease;
 }
+/* src/index.css */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto; /* Pushes footer to the bottom */
+}

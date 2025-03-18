@@ -1,11 +1,20 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { CartProvider } from './Context/CartContext';
+import { Provider } from 'react-redux';
+import store from './store';
 import LoginRegister from './Components/Pages/LoginRegister';
 import Shop from './Components/Pages/Shop';
 import Cart from './Components/Pages/Cart';
-import NotFound from './Components/Pages/NotFound'; // Add a 404 page
+import NotFound from './Components/Pages/NotFound';
+import Footer from './Components/Pages/Footer';
+
+// Layout component to include Footer
+const PageWithFooter = ({ children }) => (
+  <div className="app-container">
+    {children}
+    <Footer />
+  </div>
+);
 
 const ProtectedRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -14,16 +23,44 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   return (
-    <CartProvider>
+    <Provider store={store}>
       <Router>
         <Routes>
+          {/* LoginRegister page without Footer */}
           <Route path="/" element={<LoginRegister />} />
-          <Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />
-          <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-          <Route path="*" element={<NotFound />} />
+
+          {/* Pages with Footer */}
+          <Route
+            path="/shop"
+            element={
+              <ProtectedRoute>
+                <PageWithFooter>
+                  <Shop />
+                </PageWithFooter>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <PageWithFooter>
+                  <Cart />
+                </PageWithFooter>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <PageWithFooter>
+                <NotFound />
+              </PageWithFooter>
+            }
+          />
         </Routes>
       </Router>
-    </CartProvider>
+    </Provider>
   );
 }
 
